@@ -15,6 +15,8 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class FirstTask implements java.lang.reflect.InvocationHandler {
     public static void main(String[] args) {
+
+        //Test
         MethodInterception methodInterception = new MethodInterception();
         System.out.println(methodInterception.createPage(FirstTask.class));
     }
