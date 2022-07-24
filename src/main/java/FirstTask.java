@@ -2,7 +2,7 @@ import org.junit.Test;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
-import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import static java.lang.annotation.ElementType.METHOD;
@@ -11,16 +11,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class FirstTask implements java.lang.reflect.InvocationHandler {
-    public static void main(String[] args) {
 
-        //Test
-        MethodInterception methodInterception = new MethodInterception();
-        System.out.println(methodInterception.createPage(FirstTask.class));
-    }
-
-    private static InvocationHandler handler = new FirstTask();
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method m, Object[] args) throws Throwable {
         return null;
     }
 
@@ -51,8 +44,8 @@ public class FirstTask implements java.lang.reflect.InvocationHandler {
         private MainPage createPage(Class clazz) {
             return (MainPage) java.lang.reflect.Proxy.newProxyInstance(
                     clazz.getClassLoader(),
-                    new Class<?>[] {MainPage.class},
-                    handler
+                    new Class[]{MainPage.class},
+                    new FirstTask()
             );
         }
     }
